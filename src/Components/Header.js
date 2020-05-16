@@ -1,5 +1,6 @@
 import React from "react";
 import "./Header.css";
+import {Link} from "react-router-dom";
 
 
 export default function Header(props) {
@@ -8,7 +9,9 @@ export default function Header(props) {
         <div className="header">
             <h1>Lambda Eats</h1>
             <div className="btnContainer">
-                <button className="homeBtn">Home</button>
+                <Link to={"/"}>
+                    <button className="homeBtn">Home</button>
+                </Link>
                 <button className="helpBtn">Help</button>
             </div>
         </div>

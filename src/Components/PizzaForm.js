@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import styled from "styled-components";
 import * as yup from "yup";
 import axios from "axios";
+import Header from "./Header";
 
 //style components
 const StyledForm = styled.form`
@@ -13,14 +14,6 @@ const StyledForm = styled.form`
 }
 `;
 //set up form schema
-/*
-const formSchema = yup.object().shape({
-    name: yup.string().required("Name is a required field"),
-    email: yup.string().email("Email address is invalid").required("Must be a valid email address"),
-    password: yup.string().required("Password is a required field"),
-    tos: yup.boolean().oneOf([true], "You must agree to our terms of service")
-});
- */
 const formSchema = yup.object().shape({
     name: yup.string().min(2).required("Name is a required field"),
     pizzaSize: yup.string().oneOf(["small", "medium", "large"], "Please select a size"),
@@ -90,6 +83,7 @@ export default function PizzaForm(props) {
 
     return (
         <div className="pizzaFormContainer">
+            <Header/>
             <StyledForm onSubmit={submitForm} className="pizzaForm">
                 <label htmlFor="name">Name
                     <input
@@ -159,28 +153,8 @@ export default function PizzaForm(props) {
                         onChange={handleChange}//todo: write this function
                     />
                 </label>
-                <button disabled={buttonDisabled}>Add to Order</button>
+                <button className={"submitPizza"} disabled={buttonDisabled}>Add to Order</button>
             </StyledForm>
         </div>
     );
 }
-
-/*
-<label htmlFor="positions">
-        What would you like to help with?
-        <select
-          value={formState.position}
-          name="position"
-          id="positions"
-          onChange={inputChange}
-        >
-          <option value="Newsletter">Newsletter</option>
-          <option value="Yard Work">Yard Work</option>
-          <option value="Administrative Work">Administrative Work</option>
-          <option value="Tabling">Tabling</option>
-        </select>
-        {errorState.position.length > 0 ? (
-          <p className="error">{errorState.position}</p>
-        ) : null}
-      </label>
- */
