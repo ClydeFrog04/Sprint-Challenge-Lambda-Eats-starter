@@ -3,7 +3,7 @@ import "./TopContent.css";
 import {Link} from "react-router-dom";
 
 
-export default function TopContent(props) {
+export default function TopContent() {
 
     return (
         <div className="topContent">

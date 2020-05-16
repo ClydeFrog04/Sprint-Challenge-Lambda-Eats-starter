@@ -4,7 +4,7 @@ import Header from "./Header";
 import TopContent from "./TopContent";
 
 
-export default function Home(props) {
+export default function Home() {
 
 
 

@@ -9,10 +9,24 @@ const StyledForm = styled.form`
     display: flex;
     flex-direction: column;
     width: 90%;
-    max-width: 300px;
+    max-width: 400px;
     margin: 0 auto;
 }
 `;
+const StyledLabel = styled.label`
+    display: flex;
+    justify-content: space-between;
+    margin: 1% 0;
+`;
+const StyledCheckboxContainer = styled.div`
+    display: flex;
+    justify-content: space-between;
+    margin: 1% 0;
+`;
+const StyledFormContainer = styled.div`
+    margin: 2%;
+`;
+
 //set up form schema
 const formSchema = yup.object().shape({
     name: yup.string().min(2).required("Name is a required field"),
@@ -70,7 +84,7 @@ export default function PizzaForm(props) {
     }
     const handleChange = (event) => {
         event.persist();
-        validate(event);//todo: write validate
+        validate(event);
         const value = event.target.type === "checkbox" ? event.target.checked : event.target.value;
         setFormData({...formData, [event.target.name]: value})//set the value at a key with the value acquired above
     }
@@ -82,21 +96,21 @@ export default function PizzaForm(props) {
     }
 
     return (
-        <div className="pizzaFormContainer">
+        <StyledFormContainer className="pizzaFormContainer">
             <Header/>
             <StyledForm onSubmit={submitForm} className="pizzaForm">
-                <label htmlFor="name">Name
+                <StyledLabel htmlFor="name">Name
                     <input
                         type="text"
                         name="name"
                         id="name"
-                        value={formData.name}//todo: create state schema
-                        onChange={handleChange}//todo: write this function
+                        value={formData.name}
+                        onChange={handleChange}
                     />
-                </label>
-                <label htmlFor="pizzaSize">What size would you like?
+                </StyledLabel>
+                <StyledLabel htmlFor="pizzaSize">What size would you like?
                     <select
-                        value={formData.size}//todo:write this in state
+                        value={formData.size}
                         name="pizzaSize"
                         id="pizzaSize"
                         onChange={handleChange}
@@ -105,15 +119,15 @@ export default function PizzaForm(props) {
                         <option value="medium">Medium</option>
                         <option value="large">Large</option>
                     </select>
-                </label>
-                <div className="toppings">{/*todo: break this out and stlye*/}
+                </StyledLabel>
+                <StyledCheckboxContainer className="toppings">
                     <label htmlFor="toppings">Mushrooms
                         <input
                             type="checkbox"
                             id="mushrooms"
                             name="mushrooms"
-                            checked={formData.mushrooms}//todo write this
-                            onChange={handleChange}//todo: look above
+                            checked={formData.mushrooms}
+                            onChange={handleChange}
                         />
                     </label>
                     <label htmlFor="toppings">Pepperoni
@@ -121,8 +135,8 @@ export default function PizzaForm(props) {
                             type="checkbox"
                             id="pepperoni"
                             name="pepperoni"
-                            checked={formData.pepperoni}//todo write this
-                            onChange={handleChange}//todo: look above
+                            checked={formData.pepperoni}
+                            onChange={handleChange}
                         />
                     </label>
                     <label htmlFor="toppings">Cheese
@@ -130,8 +144,8 @@ export default function PizzaForm(props) {
                             type="checkbox"
                             id="cheese"
                             name="cheese"
-                            checked={formData.cheese}//todo write this
-                            onChange={handleChange}//todo: look above
+                            checked={formData.cheese}
+                            onChange={handleChange}
                         />
                     </label>
                     <label htmlFor="toppings">Olives
@@ -139,22 +153,22 @@ export default function PizzaForm(props) {
                             type="checkbox"
                             id="olives"
                             name="olives"
-                            checked={formData.olives}//todo write this
-                            onChange={handleChange}//todo: look above
+                            checked={formData.olives}
+                            onChange={handleChange}
                         />
                     </label>
-                </div>
-                <label htmlFor="specialInstructions">Special Instructions
+                </StyledCheckboxContainer>
+                <StyledLabel htmlFor="specialInstructions">Special Instructions
                     <textarea
                         type="text"
                         name="specialInstructions"
                         id="specialInstructions"
-                        value={formData.specialInstructions}//todo: create state schema
-                        onChange={handleChange}//todo: write this function
+                        value={formData.specialInstructions}
+                        onChange={handleChange}
                     />
-                </label>
+                </StyledLabel>
                 <button className={"submitPizza"} disabled={buttonDisabled}>Add to Order</button>
             </StyledForm>
-        </div>
+        </StyledFormContainer>
     );
 }
